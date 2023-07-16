@@ -1,2 +1,2 @@
 # Yocto_Scripts
-This are example Scripts to work with Yocto
+This are example scripts to work with Yocto
