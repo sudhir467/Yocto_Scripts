@@ -1,0 +1,57 @@
+Create object Files
+=======================
+$gcc -c arith.c 
+
+$gcc -c print.c 
+
+Create Static library
+======================
+
+$ar rcs liblwl.a arith.o print.o
+
+c -- create the archive if it doesn't exist
+
+r -- replace the older object files in the library, with the new object files
+
+s -- Write an object-file index into the archive
+
+        This index is later will be used by the compiler to speed up symbol-lookup inside the library
+
+Linking static library into application
+==========================================
+
+$ gcc userprog.c -o userprog -llwl -L.
+
+
+The -L flag indicates (a non standard) directory where the libraries can be found, else you can copy this in standard location (/usr/lib)
+
+The -l flag indicates the name of the library
+Note the -larith will be converted to libarith.a by the compiler
+
+Write a Static Library Recipe
+--------------------------------
+
+Name of the Recipe: mystatic
+
+File Location:
+----------------
+
+.a 	->	${libdir}
+
+.h	-> 	${includedir}
+
+
+ALLOW_EMPTY
+-------------
+
+By default, BitBake does not produce empty packages
+
+This default behavior can cause issues when there is an RDEPENDS or some other hard runtime requirement on the existence of the package
+
+ALLOW_EMPTY variable Specifies whether to produce an output package even if it is empty.
+
+Ex:
+
+ALLOW_EMPTY:${PN} = "1"
+ALLOW_EMPTY:${PN}-dev = "1"
+ALLOW_EMPTY:${PN}-staticdev = "1"
